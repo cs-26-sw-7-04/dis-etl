@@ -1,6 +1,7 @@
 """
 dim_datetime setup and load logic.
 """
+
 import pygrametl
 from pygrametl.tables import CachedDimension
 
@@ -12,13 +13,22 @@ def build_dim_datetime(connection) -> CachedDimension:
     a pygrametl.ConnectionWrapper wrapping a psycopg2 connection to the fklubdw database
     """
     return CachedDimension(
-        name='dim_datetime',
-        key='id',
+        name="dim_datetime",
+        key="id",
         attributes=[
-            'timestamp_utc', 'year', 'month', 'month_name', 'week',
-            'weekday', 'day', 'hour', 'minute', 'timeslot', 'timeslot_type'
+            "timestamp_utc",
+            "year",
+            "month",
+            "month_name",
+            "week",
+            "weekday",
+            "day",
+            "hour",
+            "minute",
+            "timeslot",
+            "timeslot_type",
         ],
-        lookupatts=['timestamp_utc'],   # dedup / find-or-insert key
+        lookupatts=["timestamp_utc"],  # dedup / find-or-insert key
     )
 
 
