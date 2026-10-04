@@ -1,0 +1,23 @@
+version = 1
+revision = 3
+requires-python = ">=3.14"
+
+[[package]]
+name = "dis-etl"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "pygrametl" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "pygrametl", specifier = ">=2.9" }]
+
+[[package]]
+name = "pygrametl"
+version = "2.9"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/a4/e6/4c85f13c8fda6fbc134d513070e8100a413096c4e0bb243ba75495c35ca1/pygrametl-2.9.tar.gz", hash = "sha256:9b60bdc0b5f819bee9bdc81ff0adbc67704ec78ee92f89b023a311fefe051db1", size = 310150, upload-time = "2026-03-10T12:43:12.277Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f2/57/7f861f53173bf4109874eb1fb2aecfd9e44b613519b82c01fe1935ac0980/pygrametl-2.9-py3-none-any.whl", hash = "sha256:dc1c7494f80e966a0f0ee46c86318b6a6f1b19560f88c5aeac2810604087d67c", size = 92139, upload-time = "2026-03-10T12:43:10.984Z" },
+]
