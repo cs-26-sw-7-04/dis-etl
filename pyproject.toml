@@ -8,7 +8,9 @@ authors = [
 ]
 requires-python = ">=3.14"
 dependencies = [
+    "psycopg2-binary>=2.9.13",
     "pygrametl>=2.9",
+    "tqdm>=4.70.1",
 ]
 
 [project.scripts]
