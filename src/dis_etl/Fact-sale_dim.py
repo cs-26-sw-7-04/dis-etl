@@ -14,4 +14,6 @@ def build_fact_sale(connection) -> FactTable:
     )
 
 
-def get_fact_sale_keys(fact_table: FactTable, Keys) -> 
+def get_fact_sale_quantity(fact_table: FactTable, quantity) -> int:
+
+    row 
