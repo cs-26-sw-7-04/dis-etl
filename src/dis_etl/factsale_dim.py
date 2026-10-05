@@ -1,4 +1,3 @@
-import pygrametl
 from pygrametl.tables import FactTable
 
 
@@ -12,8 +11,3 @@ def build_fact_sale(connection) -> FactTable:
              ,"dim_product"
              ,"dim_datetime"]    
     )
-
-
-def get_fact_sale_quantity(fact_table: FactTable, quantity) -> int:
-
-    row 
