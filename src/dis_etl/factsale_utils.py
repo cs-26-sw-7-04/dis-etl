@@ -11,7 +11,7 @@ def fact_sale_grouped():
     prev_sale = None
 
     for current_sale in rows:
-        current_sale_time = datetime.strptime(current_sale_row['timestamp_utc'], '%Y-%m-%d %H:%M:%S')
+        current_sale_time = datetime.strptime(current_sale['timestamp_utc'], '%Y-%m-%d %H:%M:%S')
 
         if prev_sale is None: 
             current_sale['quantity'] = 1
