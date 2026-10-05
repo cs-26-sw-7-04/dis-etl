@@ -1,15 +1,10 @@
 import csv
 from datetime import datetime 
+from dis_etl.extract import get_sale_source
 
 def fact_sale_grouped():
-    with open('data/sale.csv', mode='r', encoding='utf-8') as f:
-        reader= csv.DictReader(f, delimiter=";")
-        print(reader.fieldnames)
-        rows = list(reader)
-
-    for row in rows:
-        row["timestamp"] = datetime.fromisoformat(row["timestamp"])
-
+    
+    rows = list(get_sale_source())
     rows.sort(key=lambda r: (int(r["member_id"]), int(r["product_id"]), r["timestamp"]))
 
     groupedsale = []
@@ -44,6 +39,6 @@ def fact_sale_grouped():
 
 
 if __name__ == "__main__":
-    fact_sale_grouped()
+    print(fact_sale_grouped())
 
     
