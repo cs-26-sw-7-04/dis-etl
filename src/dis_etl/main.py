@@ -26,8 +26,8 @@ dim_facttable = build_fact_sale(conn)
 
 groupedsale = list(fact_sale_grouped())
 
-for row in groupedsale:
-    row['id'] = get_datetime_key(dim_datetime, row['timestamp_utc'])
+for row in tqdm(groupedsale, desc="Loading fact_sale", unit="rows"):
+    row['id'] = get_datetime_key(dim_datetime, row['timestamp'])
     dim_facttable.insert(row)
 
 conn.commit()
