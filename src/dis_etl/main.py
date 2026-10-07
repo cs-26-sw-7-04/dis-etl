@@ -6,9 +6,11 @@ from tqdm import tqdm
 
 from dis_etl.datetime_dim import build_dim_datetime, get_datetime_key
 from dis_etl.extract import get_member_source, get_sale_source
-from dis_etl.factsale_dim import build_fact_table_sale
-from dis_etl.factsale_utils import fact_sale_grouped
+from dis_etl.sale_fact_table import build_fact_table_sale
+from dis_etl.sale_fact_utils import fact_sale_grouped
 from dis_etl.member_dim import build_dim_member, get_member_key
+
+BATCH_SIZE = 2000
 
 
 def main() -> None:
@@ -30,8 +32,11 @@ def main() -> None:
         get_sale_source()
     )  # tqdm needs a known length for an accurate ETA/percentage
 
-    for raw_row in tqdm(sale_rows, desc="Loading dim_datetime", unit="rows"):
+    for i, raw_row in enumerate(tqdm(sale_rows, desc="Loading dim_datetime", unit="rows")):
         get_datetime_key(dim_datetime, raw_row["timestamp"])
+
+        if (i + 1) % BATCH_SIZE == 0:
+            conn.commit()
 
     conn.commit()
 
@@ -41,8 +46,11 @@ def main() -> None:
 
     member_rows = list(get_member_source())
 
-    for raw_row in tqdm(member_rows, desc="Loading dim_member", unit="rows"):
-        get_member_key(dim_member, raw_row["timestamp"])
+    for i, raw_row in enumerate(tqdm(member_rows, desc="Loading dim_member", unit="rows")):
+        get_member_key(dim_member, raw_row)
+
+        if (i + 1) % BATCH_SIZE == 0:
+            conn.commit()
 
     conn.commit()
 
