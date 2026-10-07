@@ -4,6 +4,7 @@ fact_sales setup and load logic.
 
 from pygrametl.tables import FactTable
 
+from dis_etl.datetime_utils import truncate_to_minute
 from dis_etl.extract import get_sale_source
 
 # placeholder dim_product key until the real dim_product
@@ -24,33 +25,30 @@ def build_fact_table_sale(connection) -> FactTable:
 def fact_sale_grouped():
     """Returns grouped sales"""
     rows = list(get_sale_source())
+
+    # truncate all tiemstamps like in dim_datetime
+    for sale in rows:
+        sale["timestamp"] = truncate_to_minute(sale["timestamp"])
+
     rows.sort(key=lambda r: (int(r["member_id"]), int(r["product_id"]), r["timestamp"]))
 
-    groupedsale = []
-    prev_sale = None
+    grouped = []
 
-    for current_sale in rows:
-        if prev_sale is None:
-            current_sale["quantity"] = 1
-            current_sale["price"] = int(current_sale["price"])
-            groupedsale.append(current_sale)
-            prev_sale = current_sale
-            continue
+    for sale in rows:
+        price = int(sale["price"])
 
-        deltatime = (current_sale["timestamp"] - prev_sale["timestamp"]).total_seconds()
-
-        if (
-            current_sale["member_id"] == prev_sale["member_id"]
-            and current_sale["product_id"] == prev_sale["product_id"]
-            and deltatime <= 10
+        # if goruped not empty and same as previous sale/group
+        if (grouped and grouped[-1]["member_id"] == sale["member_id"]
+                    and grouped[-1]["product_id"] == sale["product_id"]
+                    and grouped[-1]["timestamp"] == sale["timestamp"]
         ):
-            groupedsale[-1]["quantity"] += 1
-            groupedsale[-1]["price"] = int(current_sale["price"])
-
+            # sale part of previous group
+            grouped[-1]["quantity"] += 1
+            grouped[-1]["price"] += price
         else:
-            current_sale["quantity"] = 1
-            current_sale["price"] = int(current_sale["price"])
-            groupedsale.append(current_sale)
-            prev_sale = current_sale
+            # sale part of new gorup
+            sale["quantity"] = 1
+            sale["price"] = price
+            grouped.append(sale)
 
-    return groupedsale
+    return grouped

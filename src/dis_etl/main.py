@@ -7,7 +7,11 @@ from tqdm import tqdm
 from dis_etl.datetime_dim import build_dim_datetime, get_datetime_key
 from dis_etl.extract import get_member_source, get_sale_source
 from dis_etl.member_dim import build_dim_member, get_member_key
-from dis_etl.sale_fact_table import build_fact_table_sale, fact_sale_grouped
+from dis_etl.sale_fact_table import (
+    PLACEHOLDER_PRODUCT_KEY,
+    build_fact_table_sale,
+    fact_sale_grouped,
+)
 
 BATCH_SIZE = 2000
 
@@ -62,11 +66,12 @@ def main() -> None:
     for row in tqdm(groupedsale, desc="Loading fact_sale", unit="rows"):
         row["dim_datetime"] = get_datetime_key(dim_datetime, row["timestamp"])
         row["dim_member"] = get_member_key(dim_member, row["member_id"])
-        # row['dim_product'] = get_product_key(index, row['product_id'], row['timestamp'])
+        row["dim_product"] = PLACEHOLDER_PRODUCT_KEY  # TODO: replace with get_product_key(...)
+        # TODO: Product key needs to reference the correct dim_product if price changed in
+        # sales minute of multiple sales
         dim_facttable.insert(row)
 
     conn.commit()
-    conn.close()
 
 
 if __name__ == "__main__":
