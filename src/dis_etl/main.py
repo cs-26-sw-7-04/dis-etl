@@ -10,8 +10,6 @@ from dis_etl.factsale_dim import build_fact_table_sale
 from dis_etl.factsale_utils import fact_sale_grouped
 from dis_etl.member_dim import build_dim_member, get_member_key
 
-GENDER_MAP = {"M": "Male", "F": "Female", "U": "Unknown"}
-
 
 def main() -> None:
     """Main entrypoint for program ocestrating ETL from Fklub data tables to fklubdw"""
@@ -32,8 +30,8 @@ def main() -> None:
         get_sale_source()
     )  # tqdm needs a known length for an accurate ETA/percentage
 
-    for row in tqdm(sale_rows, desc="Loading dim_datetime", unit="rows"):
-        get_datetime_key(dim_datetime, row["timestamp"])
+    for raw_row in tqdm(sale_rows, desc="Loading dim_datetime", unit="rows"):
+        get_datetime_key(dim_datetime, raw_row["timestamp"])
 
     conn.commit()
 
@@ -41,16 +39,10 @@ def main() -> None:
 
     dim_member = build_dim_member(conn)
 
-    members = list(get_member_source())
+    member_rows = list(get_member_source())
 
-    for member in tqdm(members, desc="LOading dim_member", unit="rows"):
-        dim_member.ensure(
-            {
-                "member_id": member["id"],
-                "year_joined": member["year"] if member["year"] is not None else -1,
-                "gender": GENDER_MAP.get(member["gender"], "Unknown"),
-            }
-        )
+    for raw_row in tqdm(member_rows, desc="Loading dim_member", unit="rows"):
+        get_member_key(dim_member, raw_row["timestamp"])
 
     conn.commit()
 
