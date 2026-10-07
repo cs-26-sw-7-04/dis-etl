@@ -6,9 +6,8 @@ from tqdm import tqdm
 
 from dis_etl.datetime_dim import build_dim_datetime, get_datetime_key
 from dis_etl.extract import get_member_source, get_sale_source
-from dis_etl.sale_fact_table import build_fact_table_sale
-from dis_etl.sale_fact_utils import fact_sale_grouped
 from dis_etl.member_dim import build_dim_member, get_member_key
+from dis_etl.sale_fact_table import build_fact_table_sale, fact_sale_grouped
 
 BATCH_SIZE = 2000
 
