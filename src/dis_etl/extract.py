@@ -3,14 +3,15 @@ Extracting data from datasources
 No buisness logic other than type casting
 """
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
+
 import pygrametl.datasources
 
 
 def parse_timestamp_utc(s: str) -> datetime:
     """Parse a source timestamp with its offset, then convert to UTC."""
     dt = datetime.fromisoformat(s)  # e.g. '1996-11-19 17:11:51+01'
-    return dt.astimezone(timezone.utc)  # now tz-aware and in UTC
+    return dt.astimezone(UTC)  # now tz-aware and in UTC
 
 
 def parse_bool(s: str) -> bool:

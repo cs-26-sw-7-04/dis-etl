@@ -1,3 +1,6 @@
 [tools]
 python = "3.14"
 uv = "0.12.13"
+
+[tasks.main]
+run = "uv run src/dis_etl/main.py"
