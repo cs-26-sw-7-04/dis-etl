@@ -6,7 +6,6 @@ full set of fields needed for a dim_datetime row.
 import datetime
 from zoneinfo import ZoneInfo
 
-
 CPH = ZoneInfo("Europe/Copenhagen")
 
 

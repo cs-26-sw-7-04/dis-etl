@@ -2,7 +2,6 @@
 dim_datetime setup and load logic.
 """
 
-import pygrametl
 from pygrametl.tables import CachedDimension
 
 from dis_etl.datetime_utils import decompose_datetime
@@ -29,6 +28,7 @@ def build_dim_datetime(connection) -> CachedDimension:
             "timeslot_type",
         ],
         lookupatts=["timestamp_utc"],  # dedup / find-or-insert key
+        targetconnection=connection,
     )
 
 

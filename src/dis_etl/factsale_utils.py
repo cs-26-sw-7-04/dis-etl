@@ -1,9 +1,13 @@
-import csv
-from datetime import datetime 
+"""
+Transform layer for dim_datetime: Group sales if they accur by same member of same product in the
+same minute grain.
+"""
+
 from dis_etl.extract import get_sale_source
 
+
 def fact_sale_grouped():
-    
+    """Returns grouped sales"""
     rows = list(get_sale_source())
     rows.sort(key=lambda r: (int(r["member_id"]), int(r["product_id"]), r["timestamp"]))
 
@@ -11,8 +15,7 @@ def fact_sale_grouped():
     prev_sale = None
 
     for current_sale in rows:
-
-        if prev_sale is None: 
+        if prev_sale is None:
             current_sale["quantity"] = 1
             current_sale["price"] = int(current_sale["price"])
             groupedsale.append(current_sale)
@@ -21,10 +24,11 @@ def fact_sale_grouped():
 
         deltatime = (current_sale["timestamp"] - prev_sale["timestamp"]).total_seconds()
 
-        if (current_sale["member_id"] == prev_sale["member_id"] and 
-            current_sale["product_id"] == prev_sale["product_id"] and 
-            deltatime <= 10):
-
+        if (
+            current_sale["member_id"] == prev_sale["member_id"]
+            and current_sale["product_id"] == prev_sale["product_id"]
+            and deltatime <= 10
+        ):
             groupedsale[-1]["quantity"] += 1
             groupedsale[-1]["price"] = int(current_sale["price"])
 
@@ -37,8 +41,5 @@ def fact_sale_grouped():
     return groupedsale
 
 
-
 if __name__ == "__main__":
     print(fact_sale_grouped())
-
-    
