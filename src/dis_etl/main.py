@@ -36,7 +36,6 @@ def main() -> None:
     )  # tqdm needs a known length for an accurate ETA/percentage
 
     for i, raw_row in enumerate(tqdm(sale_rows, desc="Loading dim_datetime", unit="rows")):
-        break
         get_datetime_key(dim_datetime, raw_row["timestamp"])
 
         if (i + 1) % BATCH_SIZE == 0:
@@ -50,7 +49,6 @@ def main() -> None:
     member_rows = list(get_member_source())
 
     for i, raw_row in enumerate(tqdm(member_rows, desc="Loading dim_member", unit="rows")):
-        break
         get_member_key(dim_member, raw_row)
 
         if (i + 1) % BATCH_SIZE == 0:
