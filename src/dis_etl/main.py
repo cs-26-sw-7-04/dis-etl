@@ -3,9 +3,10 @@
 import psycopg2
 import pygrametl
 from tqdm import tqdm
+from dis_etl.product_dim import build_dim_product, get_product_key, lookup_product_key
 
 from dis_etl.datetime_dim import build_dim_datetime, get_datetime_key
-from dis_etl.extract import get_member_source, get_oldprice_source, get_sale_source
+from dis_etl.extract import get_member_source, get_oldprice_source, get_sale_source, get_product_source
 from dis_etl.member_dim import (
     build_dim_member,
     get_member_key,
@@ -62,6 +63,16 @@ def main() -> None:
 
     conn.commit()
 
+    dim_product = build_dim_product(conn);
+    product_rows = list(get_product_source());
+    for i, raw_row in enumerate(tqdm(product_rows, desc="Loading dim_product", unit="rows")):
+        get_product_key(dim_product, dim_datetime, raw_row)
+
+        if (i + 1) % BATCH_SIZE == 0:
+            conn.commit()
+    conn.commit()
+        
+
     # Update member dimention from member table rows
     dim_member = build_dim_member(conn)
 
@@ -89,7 +100,7 @@ def main() -> None:
         row["dim_datetime"] = get_datetime_key(dim_datetime, row["timestamp"])
         row["dim_member"] = lookup_member_key(dim_member, row["member_id"])
         row["dim_product"] = (
-            PLACEHOLDER_PRODUCT_KEY  # TODO: replace with get_product_key(...)
+            lookup_product_key(dim_product, row['product_id'], row['timestamp'])
         )
         # TODO: Product key needs to reference the correct dim_product if price changed in
         # sales minute of multiple sales
