@@ -38,8 +38,8 @@ CREATE TABLE dim_product (
     category_minor      VARCHAR(255) NOT NULL DEFAULT 'Uncategorised',
     category_sub        VARCHAR(255) NOT NULL DEFAULT 'Uncategorised',
     category_subsub     VARCHAR(255) NOT NULL DEFAULT 'Uncategorised',
-    valid_from          INTEGER NOT NULL REFERENCES dim_datetime (id),
-    valid_to            INTEGER NOT NULL REFERENCES dim_datetime (id),  -- points to an "end of time" row when still current
+    valid_from          timestamptz NOT NULL,-- REFERENCES dim_datetime (id),
+    valid_to            timestamptz NOT NULL,-- REFERENCES dim_datetime (id),  -- points to an "end of time" row when still current
     version             INTEGER NOT NULL DEFAULT 1,
     UNIQUE (product_id, version)
 );

@@ -19,6 +19,8 @@ from dis_etl.sale_fact_table import (
     fact_sale_grouped,
 )
 
+import datetime as dt
+
 BATCH_SIZE = 2000
 
 
@@ -66,7 +68,7 @@ def main() -> None:
     dim_product = build_dim_product(conn);
     product_rows = list(get_product_source());
     for i, raw_row in enumerate(tqdm(product_rows, desc="Loading dim_product", unit="rows")):
-        get_product_key(dim_product, dim_datetime, raw_row)
+        get_product_key(dim_product, oldprice_rows, raw_row)
 
         if (i + 1) % BATCH_SIZE == 0:
             conn.commit()
@@ -96,12 +98,16 @@ def main() -> None:
 
     groupedsale = list(fact_sale_grouped())
 
+    print(f"An example product is {lookup_product_key(dim_product, 1, dt.datetime.now().replace(tzinfo=dt.timezone(dt.timedelta(0))))}")
+
     for row in tqdm(groupedsale, desc="Loading fact_sale", unit="rows"):
         row["dim_datetime"] = get_datetime_key(dim_datetime, row["timestamp"])
         row["dim_member"] = lookup_member_key(dim_member, row["member_id"])
+        print(f"Timestamp: {row['timestamp']}")
         row["dim_product"] = (
             lookup_product_key(dim_product, row['product_id'], row['timestamp'])
         )
+        print(f"Inserting product {row["dim_product"]} bought on {row["dim_datetime"]}")
         # TODO: Product key needs to reference the correct dim_product if price changed in
         # sales minute of multiple sales
         dim_facttable.insert(row)
