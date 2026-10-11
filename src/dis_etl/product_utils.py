@@ -16,7 +16,7 @@ def get_history(source_row: dict, pricehistory) -> tuple[datetime, datetime, int
     output.append((previous_change, dt.max.replace(tzinfo=timezone(timedelta(0))), i, source_row['price']))
         
 
-    print(f"Getting history of product {source_row['id']}. It has the times of {output}")
+    #print(f"Getting history of product {source_row['id']}. It has the times of {output}")
     return output
 
 

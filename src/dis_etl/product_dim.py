@@ -37,5 +37,5 @@ def get_product_key(dim_product: SlowlyChangingDimension, oldprices: dict, raw_r
     return [dim_product.scdensure(version) for version in decompose_product_row(raw_row, oldprices)]
 
 def lookup_product_key(dim_product: SlowlyChangingDimension, product_id: int, asof: dt):
-    print(f"Looking up product on datetime {asof}!!!!")
-    return dim_product.lookuprowasof({'product_id': product_id}, when=asof, inclusive=(True, False)) #Cannot be cached
+    #print(f"Looking up product on datetime {asof}!!!!")
+    return dim_product.lookupasof({'product_id': product_id}, when=asof, inclusive=(True, False)) #Cannot be cached
