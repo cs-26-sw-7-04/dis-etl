@@ -32,7 +32,5 @@ def decompose_product_row(source: dict, pricehistory) -> list:
         "category_minor": "TEMPORARY",
         "category_sub": "Temporary.",
         "category_subsub": "TEMPORARY!",
-        "valid_from": valid_from,
-        "valid_to": valid_to,
-        "version": version
+        "untildate": valid_to
     } for (valid_from, valid_to, version, price) in get_history(source, pricehistory)]
