@@ -57,13 +57,13 @@ def main() -> None:
         get_oldprice_source()
     )  # tqdm needs a known length for an accurate ETA/percentage
 
-    for i, raw_row in enumerate(
+    """for i, raw_row in enumerate(
         tqdm(oldprice_rows, desc="Loading dim_datetime from oldprice", unit="rows")
     ):
         get_datetime_key(dim_datetime, raw_row["changed_on"])
 
         if (i + 1) % BATCH_SIZE == 0:
-            conn.commit()
+            conn.commit() """ # pylint: disable=pointless-string-statement
 
     conn.commit()
 
@@ -106,7 +106,7 @@ def main() -> None:
     # {lookup_product_key(dim_product, 1, dt.datetime.now()
     #   .replace(tzinfo=dt.timezone(dt.timedelta(0))))}")
 
-    for row in tqdm(groupedsale, desc="Loading fact_sale", unit="rows"):
+    for i, row in enumerate(tqdm(groupedsale, desc="Loading fact_sale", unit="rows")):
         row["dim_datetime"] = get_datetime_key(dim_datetime, row["timestamp"])
         row["dim_member"] = lookup_member_key(dim_member, row["member_id"])
         # print(f"Timestamp: {row['timestamp']}")
@@ -117,6 +117,9 @@ def main() -> None:
         # TODO: Product key needs to reference the correct dim_product if price changed in
         # sales minute of multiple sales
         dim_facttable.insert(row)
+
+        if (i + 1) % BATCH_SIZE == 0:
+            conn.commit()
 
     conn.commit()
 
