@@ -1,8 +1,16 @@
-from pygrametl.tables import CachedDimension
+"""docs :3"""
+
+from datetime import datetime as dt
+
+import pygrametl
+from pygrametl.tables import SlowlyChangingDimension
+
 from dis_etl.product_utils import decompose_product_row
 
-def build_dim_product(connection) -> CachedDimension:
-    return CachedDimension(
+
+def build_dim_product(connection) -> SlowlyChangingDimension:
+    """docs :3"""
+    return SlowlyChangingDimension(
         name="dim_product",
         key="id",
         attributes=[
@@ -15,20 +23,38 @@ def build_dim_product(connection) -> CachedDimension:
             "category_minor",
             "category_sub",
             "category_subsub",
-            "valid_from",
+            # "valid_from",
             "valid_to",
-            "version"
+            "version",
         ],
-        lookupatts=["product_id", "version"],
-        #keyrefs=["valid_from", ],
+        lookupatts=["product_id"],
+        # keyrefs=["valid_from", ],
         targetconnection=connection,
+        versionatt="version",
+        # fromatt='valid_from',
+        toatt="valid_to",
+        tofinder=pygrametl.datetimereader("untildate"),
     )
 
-def time_to_version(foo):
-    return 1;
 
-def get_product_key(dim_product: CachedDimension, dim_datetime: CachedDimension, raw_row: dict):
-    return dim_product.ensure(decompose_product_row(raw_row, dim_datetime))
+def time_to_version(foo): # pylint: disable=unused-argument, disallowed-name
+    """docs! :o"""
+    return 1
 
-def lookup_product_key(dim_product: CachedDimension, product_id: int, datetime: dim_datetime):
-    return dim_product.lookup({'product_id': product_id, 'version': time_to_version(datetime)})
+
+def get_product_key(
+    dim_product: SlowlyChangingDimension, oldprices: dict, raw_row: dict
+):
+    """docs! :o"""
+    return [
+        dim_product.scdensure(version)
+        for version in decompose_product_row(raw_row, oldprices)
+    ]
+
+
+def lookup_product_key(dim_product: SlowlyChangingDimension, product_id: int, asof: dt):
+    """docs! :o"""
+    # print(f"Looking up product on datetime {asof}!!!!")
+    return dim_product.lookupasof(
+        {"product_id": product_id}, when=asof, inclusive=(True, False)
+    )  # Cannot be cached

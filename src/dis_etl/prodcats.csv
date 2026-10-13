@@ -1,0 +1,173 @@
+id;name;category;uncertain
+1;Diverse - Fyttetur;other misc;
+2;½L Letmælk;milk;
+3;¼L Letmælk;milk;
+4;¼L Skummetmælk;milk;
+5;¼L Kærnemælk;milk;
+6;¼L Øko Letmælk;milk;
+7;¼L Øko Skummetmælk;milk;
+8;½L Skummetmælk (2x¼);milk;
+9;1L Letmælk;milk;
+10;½L Kærnemælk (2x¼);milk;
+11;½L soda/nestea excl. pant;soda;
+12;¼L Sodavand;soda;
+13;Øl(Guld & CB 47);ordinary beer;
+14;Øl(Grøn/Classic/Rød/Rå);ordinary beer;
+15;Øl(Corona);specialty beer;
+16;Cocio;cocoa;
+17;½L Matilde cacao;cocoa;
+18;¼L Øko Sødmælk;milk;
+19;½L Øko Skummet (2x¼);milk;
+20;150ml Cultura;yoghurt;
+21;200ml Mathilde Cacao;cocoa;
+22;1 Flaske Rødvin;wine;
+23;1 Flaske Hvidvin;wine;
+24;150ml Yoghurt;yoghurt;
+25;¼L Øko Sødmælk;milk;
+26;Popcorn;snack;
+27;<h2>Chips</h2>;snack;
+28;Saltstænger;snack;
+29;Øl(Tuborg Jul/Påske);christmas beer;
+30;Jolt;soda;
+31;Pant B;pant;
+32;Kaffe/Choko(1 kop);coffee;
+33;dummyproduct;other misc;
+34;Nestea;ice tea;
+35;kaffe - ansat;coffee;
+36;kaffe - stud;coffee;
+37;½L soda incl. pant;soda;
+38;Juice;juice;
+39;Ansat KAFFE(1 kop);coffee;
+40;Frisk luft v. BSS;other physical thing;yeah
+41;<h1>Snaps</h1>;liquor;
+42;Limfjordsporter;specialty beer;
+43;½L drikkecultura;yoghurt;
+44;Søm;other physical thing;
+45;¼L Mælk;milk;
+46;<h3>F-Julefrokost<h3/>;repeated;
+47;Carlsberg 47;specialty beer;
+48;<h2>F-sportsdag</h2>;repeated;
+49;Kandidat betaling;one-time;
+50;Kandidatfest - gæst;one-time;
+51;<h2> Fyttetur </h2>;repeated;
+52;Chokoladebar;snack;
+53;Fisherman;snack;
+54;Ale No. 16;specialty beer;
+55;Kort fyttetur - 2 dage;repeated;
+56;FØLsmagning;one-time;
+57;F-bog (Se E1-214);merch;
+58;Slik, Haribo;snack;
+59;Rustfri stålvogn;other physical thing;
+60;Indoor footballsæson;one-time;
+61;F-acking;repeated;
+62;F-Klub krus;merch;
+63;Drink;drink;
+64;<h2>1 flaske vin</h2>;wine;
+65;<h3>Fadøl</h3>;ordinary beer;
+66;<h3>Fadøl - Julebryg</h3>;christmas beer;
+67;Poelse med broed;event food;
+68;Fransk Hotdog;event food;
+1767;Somersby/Xide;cider;
+1768;Æblemost;juice;
+1769;Æblemost m. en enkelt;drink;
+1770;Æblemost m. dobbelt;drink;
+1771;Island <blink><b>TILBUD!</blink>;other misc;yeah
+1772;Adm Gebyr;other misc;yeah
+1773;KB Juleøl (hvidtøl);christmas beer;
+1774;F (oel);specialty beer;
+1775;Fadøl i personligt glas;ordinary beer;
+1776;Dåseøl + Grimbergen;specialty beer;
+1777;Lager/Special/Elefant;specialty beer;
+1778;Feaster<img src='//v.ht/5fLp'/>;repeated;
+1779;<b>2xJuleøl</b>;christmas beer;
+1780;Limfjordsporter Fad;specialty beer;
+1781;Famlefest;one-time;yeah
+1782;Special Hyttetur;one-time;yeah
+1783;Øko Humle/Porse Guld/Øko Påske;specialty beer;
+1784;Æ Kas Kurwand;water;
+1785;Bingo Plader;event stuff;
+1786;3x Bingo Plader;event stuff;
+1787;Burn Shot;liquor;yeah
+1789;Fames;one-time;yeah
+1790;<b>Red Bull</b>;energy drink;
+1791;Cult Cola / Cult;soda;
+1792;<h2>F-sportsdag + mad</h2>;repeated;
+1793;<b>ØKO Humle</b>;specialty beer;
+1794;<b>Tuborg Lime Cut</b>;specialty beer;yeah
+1795;<b>Schweppes Ginger Ale</b>;soda;yeah
+1796;<b>Budget Juice (250 ml)</b>;juice;
+1797;Fastelavn;repeated;
+1798;<b>BEO*/Copenhagen</b>;other misc;yeah
+1799;One EngergyDrink;energy drink;
+1800;<b>X-Ray</b>;energy drink;yeah
+1801;F-Kult Meat Pie;event food;
+1802;morgan + cola;drink;
+1803;Fadøl normal/påske (sw system);ordinary beer;
+1804;<h2>Burn Energy - Lagersalg</h2>;energy drink;
+1805;Fragelse;other misc;yeah
+1806;Vodka;liquor;
+1807;Julemumme - Kongens Bryghus;christmas beer;
+1808;Øl(Jakobsen Ale);specialty beer;
+1809;Carlsberg Christmas Ale;specialty beer;
+1810;Stripper Kassen;specialty beer;yeah
+1811;Gratis FooBar;one-time;
+1812;Ølkrus;event stuff;
+1813;HARBOE - ½L Vand excl. pant;soda;
+1814;<h2>Juice 1,5L</h2>;juice;
+1815;Kakao 1L;cocoa;
+1816;Juice 1,5L;juice;
+1817;Gin;liquor;
+1819;<h1>FredagsFranskbrød</h1>;repeated;
+1820;Fadøl(Jul) i personligt glas;christmas beer;
+1821;24 x 0,5 L sodavand uden pant;soda;
+1822;Corona Extra & Franziskaner Dunk;specialty beer;
+1823;Budget kildevand incl. pant;water;
+1824;<b>F-dag</b>;repeated;
+1825;<h2>Fadøl i kande (2 L)</h2>;ordinary beer;
+1826;Snack;snack;
+1827;Konsulent for en aften;other misc;
+1829;<h2> Brød </h2>;event food;
+1830;<b>F-LAN</b>;repeated;
+1831;Cider/Garage;cider;
+1832;<h2>Alkohol (Snaps/shots)</h2>;liquor;
+1833;<h2>1,5L vand excl. pant</h2>;water;
+1834;Kamstrup Foobar;one-time;
+1835;FLAN Sandwich lørdag frokost;event food;
+1836;FLAN Boller i karry Fredag aften;event food;
+1837;Monster;energy drink;
+1839;Kurvand/Kildevand excl. pant;water;
+1840;Øl(Thy);ordinary beer;
+1841;NetCompany Arrangement;one-time;
+1842;Svedhytte;event stuff;
+1843;Harbo 2 Liter ;soda;
+1844;Øl(Brewmaster);specialty beer;
+1845;1,5L sodavand;soda;
+1846;Øl(Staropramen);specialty beer;
+1847;<h2>Budweiser</h2>;specialty beer;
+1848;Pant A;pant;
+1849;Pant C;pant;
+1850;Vitamin well;vitamin water;
+1851;<h2>BCAA dåser - Lager salg</h2>;energy drink;
+1852;TE -  Little Miracles;ice tea;
+1853;<h2>Rød Tuborg - Maj Tilbud</h2>;specialty beer;
+1854;<h1>Pop Up - Øl smagning</h1>;one-time;
+1855;Brooklyn;specialty beer;
+1856;Smithwik Pale Ale;specialty beer;
+1857;Harboe 0,5L;soda;yeah
+1858;<h1>Specialøl</h1> (3. hylde);specialty beer;
+1859;<h2>Fyttetur Øl</h2>;ordinary beer;
+1860;Juice;juice;
+1861;Shots;liquor;
+1862;Svedhytte;event stuff;
+1863;<h2>Ingefær shot lagersalg</h2>;juice;yeah
+1864;<h2>AA Energi - Lagersalg</h2>;energy drink;
+1865;Lille cocio;cocoa;
+1866;<h2>Barbells- 3 stk</h2>;snack;
+1867;<h2>Barbells- 1 stk</h2>;snack;
+1868;Stor vand (0,8L);water;
+1869;Somersby orchard selection;cider;
+1870;0.375L soda excl. pant (Mini);soda;
+1871;Proteinbar - Barebells;snack;
+1872;Protein shake - Barebells;snack;yeah
+1873;Vitamin Well - Fersken;vitamin water;
+1874;Vitamin Well - Citron/Kaktus;vitamin water;

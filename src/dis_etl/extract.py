@@ -37,7 +37,6 @@ def get_member_source():
         delimiter=";",
     )
 
-
 def get_product_source():
     """:D"""
     return pygrametl.datasources.TypedCSVSource(
@@ -98,8 +97,8 @@ def get_category_source():
 def get_product_categories_source():
     """x'D"""
     return pygrametl.datasources.TypedCSVSource(
-        f=open("./data/product_categories.csv", "r", 16384, encoding="utf-8"),
-        casts={"id": int, "product_id": int, "category_id": int},
+        f=open("./src/dis_etl/prodcats.csv", "r", 16384, encoding="utf-8"),
+        casts={"id": int, "name": str, "category": str},
         delimiter=";",
     )
 
