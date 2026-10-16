@@ -35,7 +35,7 @@ def fact_sale_grouped():
     grouped = []
 
     for sale in rows:
-        price = int(sale["price"]) / 100 # To DKK and not ears 👂
+        price = int(sale["price"])
 
         # if goruped not empty and same as previous sale/group
         if (grouped and grouped[-1]["member_id"] == sale["member_id"]

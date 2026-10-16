@@ -118,7 +118,7 @@ def decompose_product_row(source: dict, pricehistory) -> list:
         {
             "product_id": source["id"],
             "name": source["name"],
-            "price": price / 100,
+            "price": price,
             "alcohol_content_ml": source["alcohol_content_ml"],
             "active_state": "active" if source["active"] else "inactive",
             "category_major": cat1,
