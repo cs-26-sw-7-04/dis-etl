@@ -9,7 +9,7 @@ CREATE TABLE dim_member (
 CREATE TABLE dim_datetime (
     id              SERIAL PRIMARY KEY,
     timestamp_utc   TIMESTAMPTZ NOT NULL UNIQUE,   -- canonical instant
-    year            INTEGER NOT NULL,              -- Danish local time, below
+    year            INTEGER,                       -- Danish local time, below
     month           INTEGER NOT NULL,
     month_name      VARCHAR(16) NOT NULL,
     week            INTEGER NOT NULL,

@@ -3,7 +3,7 @@ Transform layer for dim_member:
 Turn raw member row into the full set of attributes needed in dim_member
 """
 
-UNKNOWN_YEAR = -1
+UNKNOWN_YEAR = None
 
 GENDER_MAP = {"M": "Male", "F": "Female", "U": "Unknown"}
 
@@ -16,9 +16,11 @@ def normalize_gender(raw_gender) -> str:
 
 
 def normalize_year(raw_year) -> int:
-    """Returns normalised year, if no year -> -1"""
+    """Returns normalised year, if no year or > 1975 -> None"""
     if raw_year is None:
         return UNKNOWN_YEAR
+    if raw_year > 1975: # year before fklub start
+        return UNKNOWN_YEAR 
     return raw_year
 
 

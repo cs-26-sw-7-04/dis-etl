@@ -40,8 +40,10 @@ def classify_timeslot(hour: int, minute: int) -> str:
     return "1615_2400"  # fallback, shouldn't be reached
 
 
-def classify_timeslot_type(timeslot: str) -> str:
+def classify_timeslot_type(timeslot: str, weekday: int) -> str:
     """Timeslot into type"""
+    if weekday in (5, 6):
+        return "weekend"
     if timeslot in _LECTURE_SLOTS:
         return "lecture"
     if timeslot in _BREAK_SLOTS:
@@ -69,5 +71,5 @@ def decompose_datetime(dt_utc: datetime.datetime) -> dict:
         "hour": local.hour,
         "minute": local.minute,
         "timeslot": timeslot,
-        "timeslot_type": classify_timeslot_type(timeslot),
+        "timeslot_type": classify_timeslot_type(timeslot, local.weekday()),
     }
