@@ -17,7 +17,6 @@ def build_dim_product(connection) -> SlowlyChangingDimension:
             "product_id",
             "name",
             "price",
-            "alcohol_content_ml",
             "active_state",
             "category_major",
             "category_minor",

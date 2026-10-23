@@ -31,7 +31,6 @@ CREATE TABLE dim_product (
     product_id          INTEGER NOT NULL,
     name                VARCHAR(255) NOT NULL,
     price               NUMERIC(10, 2) NOT NULL,
-    alcohol_content_ml  NUMERIC(10, 2) NOT NULL DEFAULT 0,
     active_state        VARCHAR(16) NOT NULL
         CHECK (active_state IN ('inactive', 'active')),
     category_major      VARCHAR(255) NOT NULL DEFAULT 'Uncategorised',

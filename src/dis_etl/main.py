@@ -57,14 +57,6 @@ def main() -> None:
         get_oldprice_source()
     )  # tqdm needs a known length for an accurate ETA/percentage
 
-    """for i, raw_row in enumerate(
-        tqdm(oldprice_rows, desc="Loading dim_datetime from oldprice", unit="rows")
-    ):
-        get_datetime_key(dim_datetime, raw_row["changed_on"])
-
-        if (i + 1) % BATCH_SIZE == 0:
-            conn.commit() """ # pylint: disable=pointless-string-statement
-
     conn.commit()
 
     dim_product = build_dim_product(conn)
