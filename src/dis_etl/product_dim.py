@@ -22,17 +22,17 @@ def build_dim_product(connection) -> SlowlyChangingDimension:
             "category_minor",
             "category_sub",
             "category_subsub",
-            # "valid_from",
+            "valid_from",
             "valid_to",
             "version",
         ],
         lookupatts=["product_id"],
-        # keyrefs=["valid_from", ],
         targetconnection=connection,
         versionatt="version",
-        # fromatt='valid_from',
+        fromatt="valid_from",
+        fromfinder=pygrametl.datetimereader("valid_from"),
         toatt="valid_to",
-        tofinder=pygrametl.datetimereader("untildate"),
+        tofinder=pygrametl.datetimereader("valid_from"),
     )
 
 

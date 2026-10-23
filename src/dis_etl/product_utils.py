@@ -124,7 +124,7 @@ def decompose_product_row(source: dict, pricehistory) -> list:
             "category_minor": cat2,
             "category_sub": cat3,
             "category_subsub": cat4,
-            "untildate": valid_to,
+            "valid_from": valid_from,
         }
-        for (valid_from, valid_to, version, price) in get_history(source, pricehistory)
+        for (valid_from, _valid_to, _version, price) in get_history(source, pricehistory)
     ]
