@@ -1,7 +1,7 @@
 CREATE TABLE dim_member (
     id              SERIAL PRIMARY KEY,
     member_id       INTEGER NOT NULL UNIQUE,
-    year_joined     INTEGER NOT NULL,   -- -1 = unknown
+    year_joined     INTEGER,   -- nullable = unknown
     gender          VARCHAR(16) NOT NULL
         CHECK (gender IN ('Male', 'Female', 'Unknown'))
 );
@@ -10,13 +10,13 @@ CREATE TABLE dim_datetime (
     id              SERIAL PRIMARY KEY,
     timestamp_utc   TIMESTAMPTZ NOT NULL UNIQUE,   -- canonical instant
     year            INTEGER,                       -- Danish local time, below
+    semester        VARCHAR(16) NOT NULL
+        CHECK (timeslot_type IN ('fall', 'spring'),
     month           INTEGER NOT NULL,
     month_name      VARCHAR(16) NOT NULL,
-    week            INTEGER NOT NULL,
-    weekday         VARCHAR(16) NOT NULL,
     day             INTEGER NOT NULL,
     timeslot_type   VARCHAR(32) NOT NULL
-        CHECK (timeslot_type IN ('outside_schedule', 'lecture', 'break')),
+        CHECK (timeslot_type IN ('outside_schedule', 'lecture', 'break', 'weekend')),
     timeslot        VARCHAR(16) NOT NULL
         CHECK (timeslot IN (
             '0000_0815', '0815_1000', '1000_1015', '1015_1200', '1200_1230',
