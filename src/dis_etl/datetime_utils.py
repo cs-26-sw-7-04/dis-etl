@@ -63,7 +63,7 @@ def decompose_datetime(dt_utc: datetime.datetime) -> dict:
     return {
         "timestamp_utc": dt_utc,
         "year": local.year,
-        "semester": "spring" if local.month in range(1,6 + 1) else "fall",
+        "semester": f"{local.year} Spring" if local.month <= 6 else f"{local.year} Fall",
         "month": local.month,
         "month_name": local.strftime("%B"),
         "day": local.day,

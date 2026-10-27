@@ -49,10 +49,14 @@ def main() -> None:
     for i, raw_row in enumerate(
         tqdm(sale_rows, desc="Loading dim_datetime from sales", unit="rows")
     ):
+        break
         get_datetime_key(dim_datetime, raw_row["timestamp"])
 
         if (i + 1) % BATCH_SIZE == 0:
             conn.commit()
+    
+    n_sales = len(sale_rows)
+    del sale_rows
 
     oldprice_rows = list(
         get_oldprice_source()
@@ -65,6 +69,7 @@ def main() -> None:
     for i, raw_row in enumerate(
         tqdm(product_rows, desc="Loading dim_product", unit="rows")
     ):
+        break
         get_product_key(dim_product, oldprice_rows, raw_row)
 
         if (i + 1) % BATCH_SIZE == 0:
@@ -80,6 +85,7 @@ def main() -> None:
     for i, raw_row in enumerate(
         tqdm(member_rows, desc="Loading dim_member", unit="rows")
     ):
+        break
         get_member_key(dim_member, raw_row)
 
         if (i + 1) % BATCH_SIZE == 0:
@@ -91,20 +97,17 @@ def main() -> None:
 
     # Update sales fact-table
 
-    dim_facttable = build_fact_table_sale(conn)
+    facttable_sales = build_fact_table_sale(conn)
 
-    groupedsale = list(fact_sale_grouped(make_resolver(dim_product)))
+    groupedsale = fact_sale_grouped(make_resolver(pgconn), total_sales=n_sales)
 
     for i, row in enumerate(tqdm(groupedsale, desc="Loading fact_sale", unit="rows")):
         row["dim_datetime"] = get_datetime_key(dim_datetime, row["minute"])
         row["dim_member"] = lookup_member_key(dim_member, row["member_id"])
-        row["dim_product"] = row["product_key"]  # resolved before grouping
-        dim_facttable.insert(row)
-
+        row["dim_product"] = row["product_key"]
+        facttable_sales.insert(row)
         if (i + 1) % BATCH_SIZE == 0:
             conn.commit()
-
-    conn.commit()
 
     conn.commit()
 

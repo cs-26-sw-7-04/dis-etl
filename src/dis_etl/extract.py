@@ -4,6 +4,7 @@ No buisness logic other than type casting
 """
 
 from datetime import UTC, datetime
+from decimal import *
 
 import pygrametl.datasources
 
@@ -44,7 +45,7 @@ def get_product_source():
         casts={
             "id": int,
             "name": str,
-            "price": lambda s: int(s) / 100, # To DKK and not ears 👂
+            "price": lambda s: Decimal(int(s) / 100), # To DKK and not ears 👂
             "active": parse_bool,
             "deactivate_date": lambda s: parse_timestamp_utc(s) if s else None,
             "quantity": int,
@@ -62,7 +63,7 @@ def get_oldprice_source():
         casts={
             "id": int,
             "product_id": int,
-            "price": lambda s: int(s) / 100, # To DKK and not ears 👂
+            "price": lambda s: Decimal(int(s) / 100), # To DKK and not ears 👂
             "changed_on": parse_timestamp_utc,
         },
         delimiter=";",
@@ -79,7 +80,7 @@ def get_sale_source():
             "product_id": int,
             "room_id": int,
             "timestamp": parse_timestamp_utc,
-            "price": lambda s: int(s) / 100, # To DKK and not ears 👂
+            "price": lambda s: Decimal(int(s) / 100), # To DKK and not ears 👂
         },
         delimiter=";",
     )
