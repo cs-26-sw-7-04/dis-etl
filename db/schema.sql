@@ -11,7 +11,7 @@ CREATE TABLE dim_datetime (
     timestamp_utc   TIMESTAMPTZ NOT NULL UNIQUE,   -- canonical instant
     year            INTEGER,                       -- Danish local time, below
     semester        VARCHAR(16) NOT NULL
-        CHECK (timeslot_type IN ('fall', 'spring'),
+        CHECK (timeslot_type IN ('fall', 'spring')),
     month           INTEGER NOT NULL,
     month_name      VARCHAR(16) NOT NULL,
     day             INTEGER NOT NULL,

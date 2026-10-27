@@ -6,6 +6,7 @@ from pygrametl.tables import FactTable
 
 from dis_etl.datetime_utils import truncate_to_minute
 from dis_etl.extract import get_sale_source
+from dis_etl.product_dim import lookup_product_key
 
 # placeholder dim_product key until the real dim_product
 # slowly changing dimention is implemented
@@ -28,7 +29,10 @@ def fact_sale_grouped():
 
     # truncate all tiemstamps like in dim_datetime
     for sale in rows:
-        sale["timestamp"] = truncate_to_minute(sale["timestamp"])
+        sale["product_key"] = resolve_product(
+            int(sale["product_id"]), sale["timestamp"]  # raw timestamp
+        )
+        sale["minute"] = truncate_to_minute(sale["timestamp"])
 
     rows.sort(key=lambda r: (int(r["member_id"]), int(r["product_id"]), r["timestamp"]))
 
@@ -52,3 +56,12 @@ def fact_sale_grouped():
             grouped.append(sale)
 
     return grouped
+
+
+def make_resolver(dim_product):
+    def resolve(product_id: int, ts) -> int:
+        key = lookup_product_key(dim_product, product_id, ts)
+        if key is None:
+            raise ValueError(f"No product version for product {product_id} at {ts}")
+        return key
+    return resolve

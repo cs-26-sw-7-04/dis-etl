@@ -1,12 +1,13 @@
 """docs :3"""
 
-from datetime import datetime as dt
+import datetime as dt
 
 import pygrametl
 from pygrametl.tables import SlowlyChangingDimension
 
 from dis_etl.product_utils import decompose_product_row
 
+EPOCH = dt.datetime(1975, 1, 1, tzinfo=dt.timezone.utc)
 
 def build_dim_product(connection) -> SlowlyChangingDimension:
     """docs :3"""
@@ -27,12 +28,19 @@ def build_dim_product(connection) -> SlowlyChangingDimension:
             "version",
         ],
         lookupatts=["product_id"],
-        targetconnection=connection,
         versionatt="version",
         fromatt="valid_from",
         fromfinder=pygrametl.datetimereader("valid_from"),
         toatt="valid_to",
         tofinder=pygrametl.datetimereader("valid_from"),
+        minfrom=EPOCH,
+        type1atts=[
+            "category_major",
+            "category_minor",
+            "category_sub",
+            "category_subsub",
+        ],
+        targetconnection=connection,
     )
 
 
