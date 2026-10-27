@@ -30,10 +30,9 @@ def build_dim_datetime(connection) -> CachedBulkDimension:
         attributes=[
             "timestamp_utc",
             "year",
+            "semester",
             "month",
             "month_name",
-            "week",
-            "weekday",
             "day",
             "hour",
             "minute",
