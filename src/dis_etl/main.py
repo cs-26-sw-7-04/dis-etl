@@ -49,7 +49,6 @@ def main() -> None:
     for i, raw_row in enumerate(
         tqdm(sale_rows, desc="Loading dim_datetime from sales", unit="rows")
     ):
-        break
         get_datetime_key(dim_datetime, raw_row["timestamp"])
 
         if (i + 1) % BATCH_SIZE == 0:
@@ -69,7 +68,6 @@ def main() -> None:
     for i, raw_row in enumerate(
         tqdm(product_rows, desc="Loading dim_product", unit="rows")
     ):
-        break
         get_product_key(dim_product, oldprice_rows, raw_row)
 
         if (i + 1) % BATCH_SIZE == 0:
@@ -85,7 +83,6 @@ def main() -> None:
     for i, raw_row in enumerate(
         tqdm(member_rows, desc="Loading dim_member", unit="rows")
     ):
-        break
         get_member_key(dim_member, raw_row)
 
         if (i + 1) % BATCH_SIZE == 0:
